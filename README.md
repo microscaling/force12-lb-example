@@ -27,7 +27,7 @@ docker-compose up
 ## Run Microscaling-in-a-Box
 
 Sign up / log in to [Microscaling-in-a-Box](http://app.force12.io) and configure the high-priority task to run your web server by setting 
-the container name to force12/simplewebserver:latest
+the container name to force12io/simplewebserver:latest
 
 Run the command as directed on the microscaling Run page.  
 
