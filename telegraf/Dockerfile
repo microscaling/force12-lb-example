@@ -9,6 +9,6 @@ RUN apt-get update && \
   rm /tmp/telegraf_latest_amd64.deb && \
   rm -rf /var/lib/apt/lists/*
 
-ADD telegraf.conf /config/telegraf.conf
+ADD telegraf.conf telegraf.conf
 
-CMD /etc/opt/telegraf/telegraf -config /config/telegraf.conf
+CMD /opt/telegraf/telegraf -config telegraf.conf
