@@ -14,15 +14,15 @@ docker-machine env force12
 eval "$(docker-machine env force12)"
 ```
 
-Note your docker host IP address (the address, but not the port, from $DOCKER_HOST).
-
 ## Bring up infrastructure
 
 The docker-compose.yml file runs containers for nginx, consul and registrator. 
 
 ```
-docker-compose up
+docker-compose up -d
 ```
+
+If you find you don't already have docker-compose installed, the instructions are [here](https://docs.docker.com/compose/install/).
 
 ## Run Microscaling-in-a-Box
 
@@ -39,15 +39,18 @@ the container ID for each web server.  You can compare this to the number of web
 
 If microscaling is set up to allow 0 high-priority tasks, you might have no web servers running, in which case you'll see an nginx 502 error.  
 
-## See services stored in Consul
+## See web server containers registered in Consul
 
-Take a look at what's registered in Consul like this:
+The web servers are registered in Consul with the service name 'app'. You can see list them out like this:
 ```
-curl http://<docker host ip address>:8500/v1/catalog/services | python -m json.tool
+curl http://$(docker-machine ip force12):8500/v1/catalog/service/app | python -m json.tool
 ```
-View the containers registered for each service like this (use this as another way to see how many web server containers are in play):
+
+As the number of web servers changes through microscaling, you should see this reflected in the entries in Consul.
+
+If you want to see all the services registered in Consul (note plural 'services'!):
 ```
-curl http://<docker host ip address>:8500/v1/catalog/service/<name, e.g. app> | python -m json.tool
+curl http://$(docker-machine ip force12):8500/v1/catalog/services | python -m json.tool
 ```
 
 ### Build your own version of the web server container
