@@ -10,7 +10,5 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 ADD telegraf.conf /config/telegraf.conf
-ADD run.sh /run.sh
-RUN chmod +x /run.sh
 
-CMD ["/run.sh"]
+CMD sudo /etc/opt/telegraf/telegraf -config /config/telegraf.conf
