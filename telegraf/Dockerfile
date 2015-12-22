@@ -11,4 +11,4 @@ RUN apt-get update && \
 
 ADD telegraf.conf /config/telegraf.conf
 
-CMD sudo /etc/opt/telegraf/telegraf -config /config/telegraf.conf
+CMD /etc/opt/telegraf/telegraf -config /config/telegraf.conf
