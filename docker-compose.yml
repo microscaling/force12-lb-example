@@ -1,5 +1,5 @@
 lb:
-  build: .
+  build: ./lb
   links:
   - consul
   ports:
@@ -21,3 +21,26 @@ registrator:
   - consul
   volumes:
   - "/var/run/docker.sock:/tmp/docker.sock"
+
+telegraf:
+  build: ./telegraf
+  links: 
+  - lb
+  - influx
+
+influx:
+  image: tutum/influxdb
+  ports: 
+  - "8083:8083"
+  - "8086:8086"
+
+grafana:
+  image: grafana/grafana
+  environment:
+      GF_DATABASE_PATH: /gfdb/grafana.db
+  links: 
+      - influx
+  ports: 
+      - "3000:3000"
+  volumes:
+      - ~/grafana:/gfdb
