@@ -21,5 +21,6 @@ RUN rm -v /etc/nginx/conf.d/*
 ADD nginx.conf /etc/consul-templates/nginx.conf
 
 EXPOSE 80
+EXPOSE 8080
 
 CMD ["/usr/bin/runsvdir", "/etc/service"]
