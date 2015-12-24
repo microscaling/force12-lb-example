@@ -4,6 +4,7 @@ lb:
   - consul
   ports:
   - "80:80"
+  - "8080:8080"
 
 consul:
   command: -bootstrap -advertise 10.0.2.15 -recursor 8.8.8.8 -node myconsul
