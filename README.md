@@ -18,6 +18,9 @@ eval "$(docker-machine env force12)"
 
 The docker-compose.yml file runs containers for nginx, consul and registrator. 
 
+The -advertise address for consul needs to be the same as the IP address for the machine (you can use ifconfig and look for the eth0 address, for example).
+Edit that in the docker-compose.yml file before you run it.
+
 ```
 docker-compose up -d
 ```
@@ -42,6 +45,13 @@ If microscaling is set up to allow 0 high-priority tasks, you might have no web 
 ## See web server containers registered in Consul
 
 The web servers are registered in Consul with the service name 'app'. You can see list them out like this:
+
+* On Linux where you're running directly on the host:
+```
+curl localhost:8500/v1/catalog/service/app | python -m json.tool
+```
+
+* If you're running with a virtual machine
 ```
 curl http://$(docker-machine ip force12):8500/v1/catalog/service/app | python -m json.tool
 ```
@@ -49,6 +59,13 @@ curl http://$(docker-machine ip force12):8500/v1/catalog/service/app | python -m
 As the number of web servers changes through microscaling, you should see this reflected in the entries in Consul.
 
 If you want to see all the services registered in Consul (note plural 'services'!):
+
+* On Linux where you're running directly on the host:
+```
+curl localhost:8500/v1/catalog/services | python -m json.tool
+```
+
+* If you're running with a virtual machine
 ```
 curl http://$(docker-machine ip force12):8500/v1/catalog/services | python -m json.tool
 ```
