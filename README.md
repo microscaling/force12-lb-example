@@ -83,9 +83,13 @@ curl http://$(docker-machine ip force12):8500/v1/catalog/services | python -m js
 
 ### Build your own version of the web server container
 
+Build the hello-world container and tag it 'f12web'.
+
 ```
 docker build -t f12web hello-world
 ```
+
+Change the [Microscaling-in-a-box configuration](https://app.force12.io/rules) to use the image tagged `f12web` as the high-priority task. 
 
 You need to tell the Force12 client not to try to pull this image from the repository by adding the F12_PULL_IMAGES=false flag when you run it.
 
