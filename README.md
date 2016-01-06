@@ -1,5 +1,7 @@
 # force12-lb-example
-Load balanced web server that can be scaled by Force12
+Load balanced web server that can be scaled by Force12. 
+
+![Architecture](pictures/force12-lb-example.png)
 
 This project was hugely influenced by and copies chunks from [bellycard/docker-loadbalancer](http://github.com/bellycard/docker-loadbalancer). 
 
@@ -13,13 +15,18 @@ docker-machine start force12
 docker-machine env force12
 eval "$(docker-machine env force12)"
 ```
+(You can skip this if you're running directly on a Linux machine / VM). 
 
 ## Bring up infrastructure
 
 The docker-compose.yml file runs containers for nginx, consul and registrator. 
 
-The -advertise address for consul needs to be the same as the IP address for the machine (you can use ifconfig and look for the eth0 address, for example).
-Edit that in the docker-compose.yml file before you run it.
+The -advertise address for consul needs to be the same as the IP address for the machine. Here's how to find it:
+
+* Use `ifconfig` and look for the eth0 address if you're running directly on a Linux host
+* Use `docker-machine ip force12` if you're using Docker Machine to run a VM. 
+
+Edit that address in the docker-compose.yml file before you run it.
 
 ```
 docker-compose up -d
@@ -32,7 +39,11 @@ If you find you don't already have docker-compose installed, the instructions ar
 Sign up / log in to [Microscaling-in-a-Box](http://app.force12.io) and configure the high-priority task to run your web server by setting 
 the container name to force12io/simplewebserver:latest
 
-Run the command as directed on the microscaling Run page.  
+![Scaling rules](pictures/scaling-rules.png)
+
+Run the command as directed on the microscaling Run page (which will show you your own user ID).  
+
+![Run microscaling-in-a-box](pictures/run-command.png)
 
 You should be able to see a very simple web server at the IP address you noted earlier. The nginx load balancer is using its default round-robin, 
 which means that if you've got more than one web server container running, they will take it in turns to serve the web page, so you can see
