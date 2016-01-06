@@ -37,7 +37,7 @@ If you find you don't already have docker-compose installed, the instructions ar
 ## Run Microscaling-in-a-Box
 
 Sign up / log in to [Microscaling-in-a-Box](http://app.force12.io) and [configure](https://app.force12.io/rules) the high-priority task to run your web server by setting 
-the container name to force12io/simplewebserver:latest
+the Docker image to force12io/simplewebserver:latest
 
 ![Scaling rules](pictures/scaling-rules.png)
 
