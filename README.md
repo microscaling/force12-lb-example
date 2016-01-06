@@ -90,7 +90,7 @@ docker build -t f12web hello-world
 You need to tell the Force12 client not to try to pull this image from the repository by adding the F12_PULL_IMAGES=false flag when you run it.
 
 ```
-docker run -e "F12_USER_ID=5k4ek" -e "F12_PULL_IMAGES=false"  -v "/var/run/docker.sock:/var/run/docker.sock:rw" -it force12io/force12:latest
+docker run -e "F12_USER_ID=xxxxx" -e "F12_PULL_IMAGES=false"  -v "/var/run/docker.sock:/var/run/docker.sock:rw" -it force12io/force12:latest
 ```
 
 
